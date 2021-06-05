@@ -1,0 +1,102 @@
+[
+  {
+    "deviceId": "0",
+    "deviceName": "FitBand",
+    "deviceGroup": "HealthDevice",
+    "readingType": "PulseRate",
+    "maxReadingRange":"170",
+    "minReadingRange":"90",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "Oxymeter",
+    "deviceGroup": "HealthDevice",
+    "readingType": "Oxygen Level",
+    "maxReadingRange":"100",
+    "minReadingRange":"70",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "SmartRefrigerator",
+    "deviceGroup": "ThermostatDevice",
+    "readingType": "Temperature",
+    "maxReadingRange":"-40",
+    "minReadingRange":"5",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "SmartWatch",
+    "deviceGroup": "MeasuringDevice",
+    "readingType": "PulseRate",
+    "maxReadingRange":"170",
+    "minReadingRange":"90",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "SmartAC",
+    "deviceGroup": "ThermostatDevice",
+    "readingType": "Temperature",
+    "maxReadingRange":"30",
+    "minReadingRange":"5",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "GlucoseMonitoring",
+    "deviceGroup": "HealthDevice",
+    "readingType": "SugarLevel",
+    "maxReadingRange":"380",
+    "minReadingRange":"80",
+    "reading": 0
+
+  }  ,
+  {
+    "deviceId": "0",
+    "deviceName": "SmartWiFiSpeed",
+    "deviceGroup": "MeasuringDevice",
+    "readingType": "InternetSpeed",
+    "maxReadingRange":"100",
+    "minReadingRange":"30",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "SmartFan",
+    "deviceGroup": "ThermostatDevice",
+    "readingType": "Speed",
+    "maxReadingRange":"90",
+    "minReadingRange":"40",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "SoundController",
+    "deviceGroup": "MeasuringDevice",
+    "readingType": "DecibelLevel",
+    "maxReadingRange":"20",
+    "minReadingRange":"0",
+    "reading": 0
+
+  },
+  {
+    "deviceId": "0",
+    "deviceName": "Hand Hygiene ",
+    "deviceGroup": "HealthDevice",
+    "readingType": "Sanitation",
+    "maxReadingRange":"100",
+    "minReadingRange":"20",
+    "reading": 0
+
+  }
+]

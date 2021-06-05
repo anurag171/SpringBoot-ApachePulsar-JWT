@@ -1,10 +1,9 @@
 package com.anurag.iot.client.repository;
 
+import com.anurag.iot.client.data.IotDataMaster;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-import com.anurag.iot.client.data.IotData;
-
-public interface IotDataReactiveRepository extends ReactiveMongoRepository<IotData,String> {
+public interface IotDataReactiveRepository extends ReactiveMongoRepository<IotDataMaster,String> {
 
 //    Mono<IotData> findByDescription(String description);
 }

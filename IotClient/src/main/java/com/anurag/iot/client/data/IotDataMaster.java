@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @ToString
-@Document("iotdata")
-public class IotData {
+@Document("iotdatamaster")
+public class IotDataMaster {
 	
 	//Unique Device Id
 		private String deviceId;
@@ -24,5 +24,8 @@ public class IotData {
 		private String readingType;
 		
 		//Reading
-		private Double reading;	
+		private Double maxReading;
+
+		private Double minReading;
+	
 }
