@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api;
+package com.anurag.iot.data.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
