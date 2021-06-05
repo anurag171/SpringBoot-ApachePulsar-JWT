@@ -1,6 +1,6 @@
 package com.anurag.iot.data.api.exception;
 
-import com.anurag.iop.data.api.model.ErrorResponse;
+import com.anurag.iot.data.api.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ResourceProperties;
 import org.springframework.boot.autoconfigure.web.reactive.error.AbstractErrorWebExceptionHandler;
@@ -31,13 +31,14 @@ public class FunctionalErrorWebExceptionHandler extends AbstractErrorWebExceptio
 
     @Override
     protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
+        log.info("errorAttributes [{}] " ,errorAttributes);
         return RouterFunctions.route(RequestPredicates.all(), this::renderErrorResponse);
 
     }
 
     private  Mono<ServerResponse> renderErrorResponse(ServerRequest serverRequest) {
 
-        Map<String, Object> errorAttributesMap = getErrorAttributes(serverRequest, false);
+        Map<String, Object> errorAttributesMap = getErrorAttributes(serverRequest, true);
         log.info("errorAttributesMap : " + errorAttributesMap);
 
         return ServerResponse.status(HttpStatus.BAD_REQUEST)

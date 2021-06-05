@@ -1,6 +1,6 @@
 package com.anurag.iot.data.api.handler;
 
-import com.anurag.iop.data.api.constants.MetricsAPIConstants;
+import com.anurag.iot.data.api.constants.MetricsAPIConstants;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

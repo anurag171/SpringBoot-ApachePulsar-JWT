@@ -1,9 +1,10 @@
 package com.anurag.iot.data.api.handler;
 
-import com.anurag.iop.data.api.exception.PathNotFoundException;
-import com.anurag.iop.data.api.model.ErrorResponse;
-import com.anurag.iop.data.api.model.Response;
-import com.anurag.iop.data.api.repository.MetricsDao;
+import com.anurag.iot.data.api.exception.PathNotFoundException;
+import com.anurag.iot.data.api.model.ErrorResponse;
+import com.anurag.iot.data.api.model.Response;
+import com.anurag.iot.data.api.repository.MetricsDao;
+import com.anurag.iot.data.api.constants.MetricsAPIConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,7 +13,6 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 import java.util.Date;
-import static com.anurag.iop.data.api.constants.MetricsAPIConstants.*;
 
 @Component
 @Slf4j
@@ -28,6 +28,9 @@ public class MetricsHandler implements AppHandler{
             Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
             Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
 
+        log.info("MetricsHandler Received params sensor [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
+
             return ServerResponse.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(metricsDao.getMaxBySensorAndBetweenDateTime(sensor,startDate,endDate), Response.class)
@@ -38,6 +41,9 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensorgrp").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
+
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -50,7 +56,8 @@ public class MetricsHandler implements AppHandler{
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
 
-
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(metricsDao.getMinBySensorGroupAndBetweenDateTime(sensor,startDate,endDate), Response.class);
@@ -61,7 +68,8 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensor").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
-
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(metricsDao.getMinBySensorAndBetweenDateTime(sensor,startDate,endDate), Response.class)
@@ -73,7 +81,8 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensor").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
-
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,7 +95,8 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensorgrp").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
-
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -99,7 +109,8 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensorgrp").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
-
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(metricsDao.getAverageBySensorGroupAndBetweenDateTime(sensor,startDate,endDate), Response.class)
@@ -111,6 +122,8 @@ public class MetricsHandler implements AppHandler{
         String   sensor = serverRequest.queryParam("sensor").get();
         Date startDate =  formatDate(serverRequest.queryParam("startdate").get());
         Date endDate =  formatDate(serverRequest.queryParam("enddate").get());
+        log.info("MetricsHandler Max group reading Received params sensorgrp [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
@@ -125,11 +138,11 @@ public class MetricsHandler implements AppHandler{
     }
 
     public Mono<ServerResponse> notFound(final ServerRequest request) {
-        return Mono.just(new PathNotFoundException(NOT_FOUND)).transform(this::getResponse);
+        return Mono.just(new PathNotFoundException(MetricsAPIConstants.NOT_FOUND)).transform(this::getResponse);
     }
 
     Mono<ServerResponse> throwableError(final Throwable error) {
-        log.error(ERROR_RAISED, error);
+        log.error(MetricsAPIConstants.ERROR_RAISED, error);
         return Mono.just(error).transform(this::getResponse);
     }
 
@@ -143,78 +156,5 @@ public class MetricsHandler implements AppHandler{
     public Mono<ServerResponse> ok(ServerRequest serverRequest) {
         return ServerResponse.ok().build();
     }
-
-    /*public Mono<ServerResponse> getOneItem(ServerRequest serverRequest) {
-
-        String id = serverRequest.pathVariable("id");
-        Mono<Item> itemMono = itemReactiveRepository.findById(id);
-
-        return itemMono.flatMap(item ->
-                ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromObject(item)))
-                .switchIfEmpty(notFound);
-
-    }
-
-    public Mono<ServerResponse> createItem(ServerRequest serverRequest) {
-
-        Mono<Item> itemTobeInserted = serverRequest.bodyToMono(Item.class);
-
-        return itemTobeInserted.flatMap(item ->
-                ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(itemReactiveRepository.save(item), Item.class));
-
-    }
-
-    public Mono<ServerResponse> deleteItem(ServerRequest serverRequest) {
-
-        String id = serverRequest.pathVariable("id");
-        Mono<Void> deleteItem = itemReactiveRepository.deleteById(id);
-
-        return ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(deleteItem, Void.class);
-    }
-
-    public Mono<ServerResponse> updateItem(ServerRequest serverRequest) {
-
-        String id = serverRequest.pathVariable("id");
-
-        Mono<Item> updatedItem = serverRequest.bodyToMono(Item.class)
-                .flatMap((item) -> {
-
-                    Mono<Item> itemMono = itemReactiveRepository.findById(id)
-                            .flatMap(currentItem -> {
-                                currentItem.setDescription(item.getDescription());
-                                currentItem.setPrice(item.getPrice());
-                                return itemReactiveRepository.save(currentItem);
-
-                            });
-                    return itemMono;
-                });
-
-        return updatedItem.flatMap(item ->
-                ServerResponse.ok()
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(fromObject(item)))
-                .switchIfEmpty(notFound);
-
-
-    }
-
-    public Mono<ServerResponse> itemsStream(ServerRequest serverRequest){
-
-        return  ServerResponse.ok()
-                .contentType(MediaType.APPLICATION_STREAM_JSON)
-                .body(itemReactiveCappedRepository.findItemsBy(), ItemCapped.class);
-    }
-
-    public Mono<ServerResponse> itemsEx(ServerRequest serverRequest){
-
-        throw new RuntimeException("RuntimeException Occurred");
-    }*/
-
 
 }

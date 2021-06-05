@@ -1,7 +1,7 @@
 package com.anurag.iot.data.api.repository;
 
-import com.anurag.iop.data.api.model.IotDataModel;
-import com.anurag.iop.data.api.model.Response;
+import com.anurag.iot.data.api.model.IotDataModel;
+import com.anurag.iot.data.api.model.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -24,13 +24,16 @@ public class MetricsDao {
 
     public Flux<Response> getMaxBySensorAndBetweenDateTime(String sensor, Date startDate, Date endDate){
 
+        log.info("MetricsDao Received params sensor [{}],startdate [{}], enddate [{}]"
+                ,sensor,startDate,endDate);
+
         Aggregation agg = newAggregation(
                 match(Criteria.where("deviceName").is(sensor).and("date").gte(startDate).lt(endDate)),
                 group("deviceName").max("reading").as("reading"),
                 project("reading").and("product").previousOperation()
         );
 
-        return reactiveMongoTemplate.aggregate(agg,IotDataModel.class, Response.class).log();
+        return reactiveMongoTemplate.aggregate(agg, IotDataModel.class, Response.class).log();
     }
 
     public Flux<Response> getMaxBySensorGroupAndBetweenDateTime(String sensorGroup, Date startDate, Date endDate){

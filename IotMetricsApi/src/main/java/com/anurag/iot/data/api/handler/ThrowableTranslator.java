@@ -1,10 +1,10 @@
 package com.anurag.iot.data.api.handler;
 
 
-import com.anurag.iop.data.api.exception.GeoLocationNotFoundException;
-import com.anurag.iop.data.api.exception.GetGeoLocationException;
-import com.anurag.iop.data.api.exception.InvalidParametersException;
-import com.anurag.iop.data.api.exception.PathNotFoundException;
+import com.anurag.iot.data.api.exception.GeoLocationNotFoundException;
+import com.anurag.iot.data.api.exception.GetGeoLocationException;
+import com.anurag.iot.data.api.exception.InvalidParametersException;
+import com.anurag.iot.data.api.exception.PathNotFoundException;
 import org.springframework.http.HttpStatus;
 import reactor.core.publisher.Mono;
 
