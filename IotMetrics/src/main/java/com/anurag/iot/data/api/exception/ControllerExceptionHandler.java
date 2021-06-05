@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.exception;
+package com.anurag.iot.data.api.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

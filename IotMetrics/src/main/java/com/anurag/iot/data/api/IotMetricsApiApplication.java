@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api;
+package com.anurag.iot.data.api;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

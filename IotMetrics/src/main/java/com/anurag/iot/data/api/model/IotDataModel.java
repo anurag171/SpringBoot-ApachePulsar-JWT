@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.model;
+package com.anurag.iot.data.api.model;
 
 import java.util.Date;
 

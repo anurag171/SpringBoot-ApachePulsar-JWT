@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.filter;
+package com.anurag.iot.data.api.filter;
 
 import com.anurag.iop.data.api.model.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;

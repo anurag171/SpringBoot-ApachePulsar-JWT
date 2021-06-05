@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.handler;
+package com.anurag.iot.data.api.handler;
 
 
 import com.anurag.iop.data.api.exception.GeoLocationNotFoundException;

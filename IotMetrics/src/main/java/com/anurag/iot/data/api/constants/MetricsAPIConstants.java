@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.constants;
+package com.anurag.iot.data.api.constants;
 
 import java.time.format.DateTimeFormatter;
 

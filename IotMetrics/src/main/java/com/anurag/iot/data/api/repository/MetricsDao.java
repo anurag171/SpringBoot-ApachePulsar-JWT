@@ -1,4 +1,4 @@
-package com.anurag.iop.data.api.repository;
+package com.anurag.iot.data.api.repository;
 
 import com.anurag.iop.data.api.model.IotDataModel;
 import com.anurag.iop.data.api.model.Response;
