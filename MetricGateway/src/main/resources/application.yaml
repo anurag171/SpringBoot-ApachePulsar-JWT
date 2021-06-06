@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: metric-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: metric-api
+          uri: lb://metricapi
+          predicates:
+              - Method=GET,POST
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone : http://localhost:8069/eureka
+  instance:
+    localhost
+server:
+  port: '8068'
