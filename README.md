@@ -1,6 +1,5 @@
 **Flow Diagram**
-![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912737-69b55500-c6af-11eb-9956-0a941e118c61.jpeg)
-
+![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912949-180dca00-c6b1-11eb-9e7b-3eb0d97b520a.jpeg)
 
 Swagger
 Type the swagger url in your favourite browser and following page will appear
