@@ -1,4 +1,6 @@
-![image](https://user-images.githubusercontent.com/59208873/120888697-679fb780-c617-11eb-83f8-65003e93b157.png)
+**Flow Diagram**
+![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912737-69b55500-c6af-11eb-9956-0a941e118c61.jpeg)
+
 
 Swagger
 Type the swagger url in your favourite browser and following page will appear
