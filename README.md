@@ -141,11 +141,7 @@ http://localhost:8072/webjars/swagger-ui/index.html?configUrl=/v3/api-docs/swagg
   
 ## Deployment
 
-To deploy this project run
 
-```bash
-  npm run deploy
-```
 
   
 ## Documentation
@@ -231,20 +227,13 @@ startdate and enddate Examples
 2021-06-08 00:00:00
 2021-06-08 23:59:59
 
-  
-## Used By
 
-This project is used by the following companies:
-
-- Company 1
-- Company 2
-
-  
 ## Screenshots
 
 Design Diagram
 
-![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912949-180dca00-c6b1-11eb-9e7b-3eb0d97b520a.jpeg)
+![MetricApi_new](https://user-images.githubusercontent.com/59208873/121073031-ab4d1980-c7ef-11eb-9c7b-3db8985bf1ba.jpeg)
+
 
   **Swagger**
 Type the swagger url in your favourite browser and following page will appear
