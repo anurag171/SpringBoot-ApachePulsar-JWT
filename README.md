@@ -1,4 +1,57 @@
 
+# Project Title
+
+The project consist of 5 services as follows
+1. Iotclient service
+```
+This service is responsible for acting as simulator to emit data from iot devices.
+ Application uses apache pulsar as distributed streaming platform  to publish data emitted by 
+ iot simulators. I have used one topic :-iot-topic for this.
+  For demo purpose I have assumed that following data type of data will be emitted by each device
+```
+
+
+IOT DATA
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+`deviceId` | `string` | **Required**. Unique Id of a IOT device |
+`deviceName` | `string` | **Required**. Unique Name of a IOT device
+`deviceGroup` | `string` | **Required**. Unique Name of a Group of IOT device
+`readingType` | `string` | **Required**. Denoting whether it is temperature or heart rate
+`reading ` | `string` | **Required**. value of reading
+`date` | `string` | **Required**. Denoting the time
+
+Each device can emit data. The value of reading is random value generated between high and low of reading 
+maintained in master table.
+
+IOTmaster
+
+Sample reading from iotmaster.
+
+  
+  "deviceId": "1a61901c-b6aa-4cca-be3c-fadfc4fed525",
+  "deviceName": "HRM",
+  "deviceGroup": "HealthDevice",
+  "readingType": "HeartRate",
+  "maxReading": 100,
+  "minReading": 60,
+  "_class": "com.anurag.iot.client.data.IotDataMaster"
+
+
+2. Iot Data consumer : 
+
+This service has a event driven consumer responsible for consuming the  data from topic and
+writing to mongodb collection. The collection name is IOTDATA.
+
+Write now for demo purpose it simply reads the data and pushes it to mongo db with simple validation
+of checking if the fields are not null. However we could use various type of transformation 
+based on input data and than map it to one standard form.
+
+
+
+
 **Flow Diagram**
 ![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912949-180dca00-c6b1-11eb-9e7b-3eb0d97b520a.jpeg)
 
