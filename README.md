@@ -243,3 +243,12 @@ http://localhost:8072/webjars/swagger-ui/index.html
 
 **Type in search box /v3/api-docs and click on explore. The api list will appear**
 ![image](https://user-images.githubusercontent.com/59208873/120905153-c55eee80-c66d-11eb-8d73-192021cc4da9.png)
+
+**PostMan Client**
+![image](https://user-images.githubusercontent.com/59208873/121073537-40501280-c7f0-11eb-8492-a6661488d862.png)
+
+
+![image](https://user-images.githubusercontent.com/59208873/121073648-6675b280-c7f0-11eb-9018-9a9d755f91e5.png)
+
+
+
