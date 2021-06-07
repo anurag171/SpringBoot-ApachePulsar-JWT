@@ -250,5 +250,10 @@ http://localhost:8072/webjars/swagger-ui/index.html
 
 ![image](https://user-images.githubusercontent.com/59208873/121073648-6675b280-c7f0-11eb-9018-9a9d755f91e5.png)
 
+Token setting
+
+![image](https://user-images.githubusercontent.com/59208873/121073779-9a50d800-c7f0-11eb-99fc-e1bab1b6fb27.png)
+
+
 
 
