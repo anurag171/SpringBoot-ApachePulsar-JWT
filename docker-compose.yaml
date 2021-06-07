@@ -1,0 +1,68 @@
+version: "2"
+services:
+  producer_service:
+    container_name: producer_service
+    build: .
+    restart: always
+    image: iotclient
+    ports:
+      - 8071:8071
+    hostname: producer_service    
+    depends_on:
+      - pulsar
+  consumer_service:
+    container_name: consumer_service
+    build: .
+    restart: always
+    image: iotconsumer
+    ports:
+      - 8070:8070
+    hostname: consumer_service
+    depends_on:
+      - producer_service 
+  api_service:
+    container_name: api_service
+    build: .
+    restart: always
+    image: iotmetricapi
+    ports:
+      - 8072:8072
+    hostname: api_service
+    depends_on:
+      - discovery_service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka    
+  discovery_service:
+    container_name: discovery_service
+    build: .   
+    image: iotdiscovery
+    ports:
+      - 8069:8069
+    hostname: discovery_service    
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka
+  gateway_service:
+    container_name: gateway_service
+    build: .    
+    image: iotgateway
+    ports:
+      - 8068:8068
+    hostname: gateway_service    
+    depends_on:
+      - discovery_service
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka
+  pulsar:
+    container_name: pulsar
+    hostname: pulsar
+    image: apachepulsar/pulsar:latest
+    restart: always
+    ports:
+      - 6650:6650
+      - 8080:8080
+    networks:
+      - metric-networks
+    command: >
+      /bin/bash -c "bin/pulsar standalone"
+    volumes:
+      - ./pulsardata/:/pulsar/data
