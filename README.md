@@ -80,3 +80,53 @@ eureka server and route the request in round robin fashion.
 
 This service details are given below. This is a secure api which exposes 9 endpoints including 
 the login endpoint for getting the token.
+
+
+## IOT Metric Api Reference
+
+#### POST /login. Accepts application/json
+
+Takes username and password and returns the sum.
+
+For demo purpose i have used only two users.
+
+```
+
+| username | password     | 
+| :-------- | :------- | 
+| `user` | `user` | 
+| `admin` | `user` | 
+
+
+#### Get max , min ,averag and median of reading by sensor name for specic time iterval.
+Accepts application/json
+
+```http
+  GET /v1/getmaxbysensoranddatetimebetween
+  GET /v1/getminbysensoranddatetimebetween
+  GET /v1/getaveragebysensoranddatetimebetween
+  GET /v1/getmedianbysensoranddatetimebetween
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `sensor` | `string` | **Required**. Name of sensor |
+| `startdate` | `string` | **Required**. start date in YYYY-MM-DD HH:MM:SS |
+| `enddate` | `string` | **Required**. end date in YYYY-MM-DD HH:MM:SS  |
+
+#### Get max , min ,averag and median of reading by sensor group name for specic time iterval.
+Accepts application/json
+
+```http
+  GET /v1/getmaxbysensorgrpanddatetimebetween
+  GET /v1/getminbysensorgrpanddatetimebetween
+  GET /v1/getaveragebysensorgrpanddatetimebetween
+  GET /v1/getmedianbysensorgrpanddatetimebetween
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `sensorgrp` | `string` | **Required**. Name of sensor group |
+| `startdate` | `string` | **Required**. start date in YYYY-MM-DD HH:MM:SS |
+| `enddate` | `string` | **Required**. end date in YYYY-MM-DD HH:MM:SS  |
+
