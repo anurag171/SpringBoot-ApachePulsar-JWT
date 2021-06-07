@@ -1,19 +1,4 @@
 
-**Flow Diagram**
-![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912949-180dca00-c6b1-11eb-9e7b-3eb0d97b520a.jpeg)
-
-
-**Swagger**
-Type the swagger url in your favourite browser and following page will appear
-http://localhost:8072/webjars/swagger-ui/index.html
-![image](https://user-images.githubusercontent.com/59208873/120905103-71540a00-c66d-11eb-89e0-e93b286ef1fc.png)
-
-
-**Type in search box /v3/api-docs and click on explore. The api list will appear**
-![image](https://user-images.githubusercontent.com/59208873/120905153-c55eee80-c66d-11eb-8d73-192021cc4da9.png)
-
-
-
 
 # Iot Data and Metric Api
 
@@ -82,6 +67,11 @@ This service details are given below. This is a secure api which exposes 9 endpo
 the login endpoint for getting the token.
 
 
+  
+
+
+
+
 ## IOT Metric Api Reference
 
 #### POST /login. Accepts application/json
@@ -130,3 +120,137 @@ Accepts application/json
 | `startdate` | `string` | **Required**. start date in YYYY-MM-DD HH:MM:SS |
 | `enddate` | `string` | **Required**. end date in YYYY-MM-DD HH:MM:SS  |
 
+
+
+  
+## Appendix
+
+Any additional information goes here
+
+  
+## Demo
+
+Insert gif or link to demo
+
+Swagger link
+
+http://localhost:8072/webjars/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/Api%20for%20Max%20Reading%20for%20Sensor%20Group
+
+
+
+  
+## Deployment
+
+To deploy this project run
+
+```bash
+  npm run deploy
+```
+
+  
+## Documentation
+
+[Documentation](https://linktodocumentation)
+
+  
+## Installation 
+
+Install my-project with npm
+
+```bash 
+  npm install my-project
+  cd my-project
+```
+    
+## Run Locally
+
+Run the project locally you need to have pulsar running on your docker.
+You can run following command into command line to start apachae pulsar 
+
+docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data  apachepulsar/pulsar:latest  bin/pulsar standalone
+
+Once done
+
+Clone the project into your favourite ide
+
+```bash
+  git clone https://github.com/anurag171/finalsubmission
+```
+
+Go to the project directory finalsubmission
+
+```bash
+  cd /DataStore/
+  mvn clean package
+  docker build -t iotconsumer .
+  cd ../IotClient/
+  mvn clean package
+  docker build -t iotclient .
+  cd ../IotMetricsApi/
+  mvn clean package
+  docker build -t iotmetricapi .
+  cd ../MetricDiscovery/
+  mvn clean package
+  docker build -t iotdiscovery .
+  cd ../MetricGateway/
+  mvn clean package
+  docker build -t iotgateway .
+  cd ..
+  docker-compose up
+```
+
+  
+## Usage/Examples
+
+run the swagger ui
+1. Step one click on /login end point
+2. Click on try now
+3. Put username -->user or admin
+4. Put password --> user
+5. Click on execute
+6. Copy the token
+7. Click on right top on Authorize
+8. Input the token obtained in value field and click on Authorize
+9. Now we can try any api
+
+Sample Data :
+
+Sensor Group
+
+1. HealthDevice
+2. ThermostatDevice
+3. MeasuringDevice
+
+Sensor Name
+
+1. HRM
+2. FitBand
+3. Oxymeter
+
+startdate and enddate Examples
+2021-06-08 00:00:00
+2021-06-08 23:59:59
+
+  
+## Used By
+
+This project is used by the following companies:
+
+- Company 1
+- Company 2
+
+  
+## Screenshots
+
+Design Diagram
+
+![Metric _Api2](https://user-images.githubusercontent.com/59208873/120912949-180dca00-c6b1-11eb-9e7b-3eb0d97b520a.jpeg)
+
+  **Swagger**
+Type the swagger url in your favourite browser and following page will appear
+http://localhost:8072/webjars/swagger-ui/index.html
+![image](https://user-images.githubusercontent.com/59208873/120905103-71540a00-c66d-11eb-89e0-e93b286ef1fc.png)
+
+
+**Type in search box /v3/api-docs and click on explore. The api list will appear**
+![image](https://user-images.githubusercontent.com/59208873/120905153-c55eee80-c66d-11eb-8d73-192021cc4da9.png)
