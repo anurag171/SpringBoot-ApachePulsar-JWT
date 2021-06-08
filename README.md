@@ -123,10 +123,6 @@ Accepts application/json
 
 
   
-## Appendix
-
-Any additional information goes here
-
   
 ## Demo
 
@@ -149,14 +145,6 @@ http://localhost:8072/webjars/swagger-ui/index.html?configUrl=/v3/api-docs/swagg
 [Documentation](https://linktodocumentation)
 
   
-## Installation 
-
-Install my-project with npm
-
-```bash 
-  npm install my-project
-  cd my-project
-```
     
 ## Run Locally
 
