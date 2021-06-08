@@ -59,9 +59,7 @@ services:
     restart: always
     ports:
       - 6650:6650
-      - 8080:8080
-    networks:
-      - metric-networks
+      - 8080:8080    
     command: >
       /bin/bash -c "bin/pulsar standalone"
     volumes:
