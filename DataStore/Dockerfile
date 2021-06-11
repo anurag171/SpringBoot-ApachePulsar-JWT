@@ -1,6 +1,11 @@
+FROM maven as build
+WORKDIR /app
+COPY . .
+RUN mvn install
+
 FROM openjdk:8-jdk-alpine
 LABEL maintainer="anurag171@gmail.com"
-VOLUME /main-app
-ADD target/iotdatastore.jar iotdatastore.jar
+WORKDIR /app
+COPY --from=build /app/target/iotdatastore.jar /app
 EXPOSE 8070
-ENTRYPOINT ["java", "-jar","/iotdatastore.jar"]
+ENTRYPOINT ["java", "-jar","iotdatastore.jar"]

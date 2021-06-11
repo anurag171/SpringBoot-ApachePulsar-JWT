@@ -1,6 +1,11 @@
+FROM maven as build
+WORKDIR /app
+COPY . .
+RUN mvn install
+
 FROM openjdk:8-jdk-alpine
 LABEL maintainer="anurag171@gmail.com"
-VOLUME /main-app
-ADD target/iotclient.jar iotclient.jar
+WORKDIR /app
+COPY --from=build /app/target/iotclient.jar /app
 EXPOSE 8071
-ENTRYPOINT ["java", "-jar","/iotclient.jar"]
+ENTRYPOINT ["java", "-jar","iotclient.jar"]
