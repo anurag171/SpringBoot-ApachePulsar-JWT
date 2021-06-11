@@ -3,7 +3,7 @@
 # Iot Data and Metric Api
 
 The project consist of 5 services as follows
-1. Iotclient service (Port : 8071)
+1. **Iotclient service** **(Port : 8071)**
 ```
 This service is responsible for acting as simulator to emit data from iot devices.
  Application uses apache pulsar as distributed streaming platform  to publish data emitted by 
@@ -41,7 +41,7 @@ Sample reading from iotmaster.
   "_class": "com.anurag.iot.client.data.IotDataMaster"
 
 
-2. Iot Data consumer : (Port : 8070)
+2. **Iot Data consumer** : **(Port : 8070)**
 
 This service has a event driven consumer responsible for consuming the  data from topic and
 writing to mongodb collection. The collection name is IOTDATA.
@@ -51,11 +51,11 @@ of checking if the fields are not null. However we could use various type of tra
 based on input data and than map it to one standard form.
 
 
-3. IOT Discovery (Port : 8069)
+3.** IOT Discovery** **(Port : 8069)**
 
 This service is a standard eureka discovery server which registers the metric api. 
 
-4. IOT Gateway (Port : 8068)
+4. **IOT Gateway**** (Port : 8068)**
 
 This service is a standard API Gateway which will forward all the data from client to api.
 This service also acts as a load balancer and will fetch all the instances of api registered with
