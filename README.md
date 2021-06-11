@@ -164,23 +164,29 @@ Clone the project into your favourite ide
 Go to the project directory finalsubmission
 
 ```bash
-  cd /DataStore/
-  mvn clean package
+  cd /DataStore/  
   docker build -t iotconsumer .
-  cd ../IotClient/
-  mvn clean package
+  cd ../IotClient/  
   docker build -t iotclient .
-  cd ../IotMetricsApi/
-  mvn clean package
+  cd ../IotMetricsApi/  
   docker build -t iotmetricapi .
-  cd ../MetricDiscovery/
-  mvn clean package
+  cd ../MetricDiscovery/  
   docker build -t iotdiscovery .
-  cd ../MetricGateway/
-  mvn clean package
+  cd ../MetricGateway/ 
   docker build -t iotgateway .
   cd ..
   docker-compose up
+  
+  if docker-compose is not running properly than we can do following
+  
+  docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data  apachepulsar/pulsar:latest  bin/pulsar standalone
+  docker run -d -it -p 8071:8071 am17docker/iotclient
+  docker run -d -it -p 8070:8070 am17docker/iotdatastore
+  docker run -d -it -p 8069:8069 am17docker/iotdiscovery
+  docker run -d -it -p 8068:8068 am17docker/iotgateway
+  docker run -d -it -p 8072:8072 am17docker/iotmetricapi
+  
+  
 ```
 
   
