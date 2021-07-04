@@ -7,7 +7,17 @@ services:
     image: iotclient
     ports:
       - 8071:8071
-    hostname: producer_service    
+    hostname: producer_service
+    environment:
+      - server.port=8071
+      - pulsar.service-url=pulsar://pulsar:6650
+      - data-topic=iot-topic
+      - spring.data.mongodb.database=iotdatastore
+      - spring.data.mongodb.authentication-database=iotdatastore
+      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+      - iot.devices.count=8
+      - iot.data.emit.frequency.in.seconds=1
+      - load.data.file.path=src/main/resources/iotdata_additional.json
     depends_on:
       - pulsar
   consumer_service:
@@ -18,8 +28,16 @@ services:
     ports:
       - 8070:8070
     hostname: consumer_service
+    environment:
+      - server.port=8070
+      - spring.application.name=datastore
+      - data-topic=iot-topic
+      - spring.data.mongodb.database=iotdatastore
+      - spring.data.mongodb.authentication-database=iotdatastore
+      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+      - pulsar.service-url=pulsar://pulsar:6650      
     depends_on:
-      - producer_service 
+      - producer_service
   api_service:
     container_name: api_service
     build: .
@@ -31,27 +49,57 @@ services:
     depends_on:
       - discovery_service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka    
+      - spring.application.name=metricapi
+      - server.port=8072
+      - spring.data.mongodb.database=iotdatastore
+      - spring.data.mongodb.authentication-database=iotdatastore
+      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
+      - springdoc.swagger-ui.path=/swagger-ui.html
+      - eureka.instance.instance-id= $${spring.application.name}:$${random.value}
+      - eureka.client.service-url.defaultZone= http://discovery_service:8069/eureka
+      - password.encoder.secret=methecoderondigitalplatform
+      - password.encoder.iteration=33
+      - password.encoder.keylength=256
+      - jwt.secret=ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+      - jwt.expiration=28800
+      - springdoc.swagger-ui.disable-swagger-default-url=true
+      - springdoc.api-docs.enabled.path=/v3/api-docs
+      - springdoc.version=3.0
   discovery_service:
     container_name: discovery_service
-    build: .   
+    build: .
+    restart: always
     image: iotdiscovery
     ports:
       - 8069:8069
-    hostname: discovery_service    
+    hostname: discovery_service
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka
+      - server.port=8069
+      - spring.application.name=MetricDiscovery
+      - eureka.client.register-with-eureka=false
+      - eureka.client.fetch-registry=false
+      - logging.level.com.netflix.eureka=OFF
+      - logging.level.com.netflix.discovery=OFF
   gateway_service:
     container_name: gateway_service
-    build: .    
+    build: .
+    restart: always
     image: iotgateway
     ports:
       - 8068:8068
-    hostname: gateway_service    
+    hostname: gateway_service
+    environment:
+      - spring.application.name=metric-gateway
+      - spring.cloud.gateway.routes.id=metric-api
+      - spring.cloud.gateway.routes.uri=lb://metricapi
+      - spring.cloud.gateway.routes.predicates.Method=GET,POST
+      - eureka.client.register-with-eureka=true
+      - eureka.client.fetch-registry=true
+      - eureka.client.service-url.defaultZone=http://discovery_service:8069/eureka
+      - eureka.instance=localhost
+      - server.port=8068
     depends_on:
       - discovery_service
-    environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery_service:8069/eureka
   pulsar:
     container_name: pulsar
     hostname: pulsar
@@ -59,7 +107,7 @@ services:
     restart: always
     ports:
       - 6650:6650
-      - 8080:8080    
+      - 8080:8080
     command: >
       /bin/bash -c "bin/pulsar standalone"
     volumes:
