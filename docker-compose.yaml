@@ -11,13 +11,6 @@ services:
     environment:
       - server.port=8071
       - pulsar.service-url=pulsar://pulsar:6650
-      - data-topic=iot-topic
-      - spring.data.mongodb.database=iotdatastore
-      - spring.data.mongodb.authentication-database=iotdatastore
-      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
-      - iot.devices.count=8
-      - iot.data.emit.frequency.in.seconds=1
-      - load.data.file.path=src/main/resources/iotdata_additional.json
     depends_on:
       - pulsar
   consumer_service:
@@ -31,10 +24,6 @@ services:
     environment:
       - server.port=8070
       - spring.application.name=datastore
-      - data-topic=iot-topic
-      - spring.data.mongodb.database=iotdatastore
-      - spring.data.mongodb.authentication-database=iotdatastore
-      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
       - pulsar.service-url=pulsar://pulsar:6650      
     depends_on:
       - producer_service
@@ -51,20 +40,8 @@ services:
     environment:
       - spring.application.name=metricapi
       - server.port=8072
-      - spring.data.mongodb.database=iotdatastore
-      - spring.data.mongodb.authentication-database=iotdatastore
-      - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
-      - springdoc.swagger-ui.path=/swagger-ui.html
       - eureka.instance.instance-id= $${spring.application.name}:$${random.value}
-      - eureka.client.service-url.defaultZone= http://discovery-service:8069/eureka
-      - password.encoder.secret=methecoderondigitalplatform
-      - password.encoder.iteration=33
-      - password.encoder.keylength=256
-      - jwt.secret=ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
-      - jwt.expiration=28800
-      - springdoc.swagger-ui.disable-swagger-default-url=true
-      - springdoc.api-docs.enabled.path=/v3/api-docs
-      - springdoc.version=3.0
+      - eureka.client.service-url.defaultZone= http://discovery-service:8069/eureka 
   discovery_service:
     container_name: discovery-service
     build: .
@@ -90,13 +67,13 @@ services:
     hostname: gateway-service
     environment:
       - spring.application.name=gateway-service
-      - spring.cloud.gateway.routes.id=metric-api
-      - spring.cloud.gateway.routes.uri=lb://metricapi
+      - spring.cloud.gateway.routes.id=api-service
+      - spring.cloud.gateway.routes.uri=lb://api-service
       - spring.cloud.gateway.routes.predicates.Method=GET,POST
       - eureka.client.register-with-eureka=true
       - eureka.client.fetch-registry=true
       - eureka.client.service-url.defaultZone=http://discovery-service:8069/eureka
-      - eureka.instance=localhost
+      - eureka.instance=discovery-service
       - server.port=8068
     depends_on:
       - discovery-service
