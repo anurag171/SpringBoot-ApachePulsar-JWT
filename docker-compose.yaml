@@ -39,15 +39,15 @@ services:
     depends_on:
       - producer_service
   api_service:
-    container_name: api_service
+    container_name: api-service
     build: .
     restart: always
     image: iotmetricapi
     ports:
       - 8072:8072
-    hostname: api_service
+    hostname: api-service
     depends_on:
-      - discovery_service
+      - discovery-service
     environment:
       - spring.application.name=metricapi
       - server.port=8072
@@ -56,7 +56,7 @@ services:
       - spring.data.mongodb.uri=mongodb+srv://mytaskapp:dbpass%40123@cluster0.ljnf5.mongodb.net/?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=true
       - springdoc.swagger-ui.path=/swagger-ui.html
       - eureka.instance.instance-id= $${spring.application.name}:$${random.value}
-      - eureka.client.service-url.defaultZone= http://discovery_service:8069/eureka
+      - eureka.client.service-url.defaultZone= http://discovery-service:8069/eureka
       - password.encoder.secret=methecoderondigitalplatform
       - password.encoder.iteration=33
       - password.encoder.keylength=256
@@ -66,13 +66,13 @@ services:
       - springdoc.api-docs.enabled.path=/v3/api-docs
       - springdoc.version=3.0
   discovery_service:
-    container_name: discovery_service
+    container_name: discovery-service
     build: .
     restart: always
     image: iotdiscovery
     ports:
       - 8069:8069
-    hostname: discovery_service
+    hostname: discovery-service
     environment:
       - server.port=8069
       - spring.application.name=MetricDiscovery
@@ -80,26 +80,26 @@ services:
       - eureka.client.fetch-registry=false
       - logging.level.com.netflix.eureka=OFF
       - logging.level.com.netflix.discovery=OFF
-  gateway_service:
-    container_name: gateway_service
+  gateway-service:
+    container_name: gateway-service
     build: .
     restart: always
     image: iotgateway
     ports:
       - 8068:8068
-    hostname: gateway_service
+    hostname: gateway-service
     environment:
-      - spring.application.name=metric-gateway
+      - spring.application.name=gateway-service
       - spring.cloud.gateway.routes.id=metric-api
       - spring.cloud.gateway.routes.uri=lb://metricapi
       - spring.cloud.gateway.routes.predicates.Method=GET,POST
       - eureka.client.register-with-eureka=true
       - eureka.client.fetch-registry=true
-      - eureka.client.service-url.defaultZone=http://discovery_service:8069/eureka
+      - eureka.client.service-url.defaultZone=http://discovery-service:8069/eureka
       - eureka.instance=localhost
       - server.port=8068
     depends_on:
-      - discovery_service
+      - discovery-service
   pulsar:
     container_name: pulsar
     hostname: pulsar
