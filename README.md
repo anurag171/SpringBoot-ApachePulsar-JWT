@@ -165,15 +165,15 @@ Go to the project directory finalsubmission
 
 ```bash
   cd /DataStore/  
-  docker build -t iotconsumer .
+  docker build -t am17docker/iotconsumer .
   cd ../IotClient/  
-  docker build -t iotclient .
+  docker build -t am17docker/iotclient .
   cd ../IotMetricsApi/  
-  docker build -t iotmetricapi .
+  docker build -t am17docker/iotmetricapi .
   cd ../MetricDiscovery/  
-  docker build -t iotdiscovery .
+  docker build -t am17docker/iotdiscovery .
   cd ../MetricGateway/ 
-  docker build -t iotgateway .
+  docker build -t am17docker/iotgateway .
   cd ..
   docker-compose up
   
@@ -181,7 +181,7 @@ Go to the project directory finalsubmission
   
   docker run -d -it -p 6650:6650 -p 8080:8080 -v $PWD/data:/pulsar/data  apachepulsar/pulsar:latest  bin/pulsar standalone
   docker run -d -it -p 8071:8071 am17docker/iotclient
-  docker run -d -it -p 8070:8070 am17docker/iotdatastore
+  docker run -d -it -p 8070:8070 am17docker/iotconsumer
   docker run -d -it -p 8069:8069 am17docker/iotdiscovery
   docker run -d -it -p 8068:8068 am17docker/iotgateway
   docker run -d -it -p 8072:8072 am17docker/iotmetricapi
