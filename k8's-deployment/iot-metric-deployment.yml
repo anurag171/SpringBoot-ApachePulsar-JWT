@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iot-metric-deployment
+  labels:
+    app: iot-metric
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: iot-metric
+  template:
+    metadata:
+      labels:
+        app: iot-metric
+    spec:
+      containers:
+        - name: iot-metric
+          image: am17docker/iotmetricapi
+          ports:
+            - containerPort: 8072
+          env:
+            - name: spring.application.name
+              value: metricapi
+            - name: server.port
+              value: 8072
+            - name: eureka.instance.instance-id
+              value: $${spring.application.name}:$${random.value}
+            - name: eureka.client.service-url.defaultZone
+              value: http://discovery-service-service:8069/eureka
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: iot-metric-service
+spec:
+  selector:
+    app: iot-metric
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8072
+      targetPort: 8072

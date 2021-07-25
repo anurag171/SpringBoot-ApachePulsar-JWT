@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-service-deployment
+  labels:
+    app: gateway-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-service
+  template:
+    metadata:
+      labels:
+        app: gateway-service
+    spec:
+      containers:
+        - name: gateway-service
+          image: am17docker/iotgateway
+          ports:
+            - containerPort: 8068
+          env:
+            - name: spring.application.name
+              value: "gateway-service"
+            - name: spring.cloud.gateway.routes.id
+              value: "iot-metric"
+            - name: spring.cloud.gateway.routes.uri
+              value: "lb://iot-metric"
+            - name: spring.cloud.gateway.routes.predicates.Method
+              value: "GET,POST"
+            - name: eureka.client.register-with-eureka
+              value: "true"
+            - name: eureka.client.fetch-registry
+              value: "true"
+            - name: eureka.client.service-url.defaultZone
+              value: "http://discovery-service-service:8069/eureka"
+            - name: eureka.instance
+              value: "discovery-service"
+            - name: server.port
+              value: "8068"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: metric-gateway-service
+spec:
+  selector:
+    app: gateway-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8068
+      targetPort: 8068

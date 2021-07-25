@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-service-deployment
+  labels:
+    app: discovery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: discovery-service
+  template:
+    metadata:
+      labels:
+        app: discovery-service
+    spec:
+      containers:
+        - name: discovery-service
+          image: am17docker/iotdiscovery
+          ports:
+            - containerPort: 8069
+          env:
+            - name: server.port
+              value: "8069"
+            - name: spring.application.name
+              value: "MetricDiscovery"
+            - name: eureka.client.register-with-eureka
+              value: "false"
+            - name: eureka.client.fetch-registry
+              value: "false"
+            - name: logging.level.com.netflix.eureka
+              value: "OFF"
+            - name: logging.level.com.netflix.discovery
+              value: "OFF"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-service-service
+spec:
+  selector:
+    app: discovery-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8069
+      targetPort: 8069
