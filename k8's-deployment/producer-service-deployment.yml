@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer-service-deployment
+  labels:
+    app: producer-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer-service
+  template:
+    metadata:
+      labels:
+        app: producer-service
+    spec:
+      containers:
+        - name: producer-service
+          image: am17docker/iotclient
+          ports:
+            - containerPort: 8071
+          env:
+            - name: spring.application.name
+              value: "producer-service"
+            - name: pulsar.service-url
+              value: "pulsar://pulsar:6650"
+            - name: server.port
+              value: "8071"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: producer-service-service
+spec:
+  selector:
+    app: producer-service
+  ports:
+    - protocol: TCP
+      port: 8071
+      targetPort: 8071

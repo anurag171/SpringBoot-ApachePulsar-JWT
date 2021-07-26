@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pulsar
+spec:
+  selector:
+    matchLabels:
+      app: pulsar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pulsar
+    spec:
+      volumes:
+        - name: pulsar-data
+          hostPath:
+            path: "/Users/ubi-lab/Developer/Kubernetes/learning/pulsar_docker/data"
+      containers:
+        - name: pulsar
+          image: apachepulsar/pulsar:latest
+          command:
+            - bin/pulsar
+            - standalone
+          ports:
+            - containerPort: 6650
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: "/pulsar/data"
+              name: pulsar-data
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pulsar
+  labels:
+    run: pulsar
+spec:
+  type: NodePort
+  ports:
+    - name: pulsar-port
+      protocol: "TCP"
+      port: 6650
+      targetPort: 6650
+    - name: http
+      protocol: "TCP"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: pulsar
