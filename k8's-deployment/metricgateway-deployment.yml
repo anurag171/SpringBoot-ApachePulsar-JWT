@@ -25,7 +25,7 @@ spec:
             - name: spring.cloud.gateway.routes.id
               value: "iot-metric"
             - name: spring.cloud.gateway.routes.uri
-              value: "lb://iot-metric"
+              value: "lb://metricapi"
             - name: spring.cloud.gateway.routes.predicates.Method
               value: "GET,POST"
             - name: eureka.client.register-with-eureka

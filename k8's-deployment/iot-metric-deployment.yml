@@ -21,13 +21,13 @@ spec:
             - containerPort: 8072
           env:
             - name: spring.application.name
-              value: metricapi
+              value: "metricapi"
             - name: server.port
-              value: 8072
+              value: "8072"
             - name: eureka.instance.instance-id
-              value: $${spring.application.name}:$${random.value}
+              value: "$${spring.application.name}:$${random.value}"
             - name: eureka.client.service-url.defaultZone
-              value: http://discovery-service-service:8069/eureka
+              value: "http://discovery-service-service:8069/eureka"
 ---
 apiVersion: v1
 kind: Service
