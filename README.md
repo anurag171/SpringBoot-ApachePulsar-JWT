@@ -187,6 +187,16 @@ Go to the project directory finalsubmission
   docker run -d -it -p 8072:8072 am17docker/iotmetricapi
   
   
+  
+  
+  
+ 
+
+
+
+
+  
+  
 ```
 
   
@@ -227,6 +237,16 @@ startdate and enddate Examples
 Design Diagram
 
 ![MetricApi_new](https://user-images.githubusercontent.com/59208873/121073031-ab4d1980-c7ef-11eb-9c7b-3db8985bf1ba.jpeg)
+
+
+Kubernetes Deployement
+
+
+![k8's-deployment](https://user-images.githubusercontent.com/59208873/126972256-9d4a31dc-3af1-4cb2-9a4e-8755cbaf500d.png)
+
+
+![statusk8](https://user-images.githubusercontent.com/59208873/126972228-958fc784-dce3-4a7d-bce2-53914c64fcc7.PNG)
+
 
 
   **Swagger**
