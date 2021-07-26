@@ -190,11 +190,10 @@ Go to the project directory finalsubmission
   
   
   
-  
- ![k8's-deployment](https://user-images.githubusercontent.com/59208873/126972036-e8f22cf5-e9ca-4c11-835f-698c797abc99.png)
+ 
 
 
-![statusk8](https://user-images.githubusercontent.com/59208873/126972058-1d0622ed-08e7-4e26-8137-eaf59ff39960.PNG)
+
 
   
   
@@ -238,6 +237,16 @@ startdate and enddate Examples
 Design Diagram
 
 ![MetricApi_new](https://user-images.githubusercontent.com/59208873/121073031-ab4d1980-c7ef-11eb-9c7b-3db8985bf1ba.jpeg)
+
+
+Kubernetes Deployement
+
+
+![k8's-deployment](https://user-images.githubusercontent.com/59208873/126972256-9d4a31dc-3af1-4cb2-9a4e-8755cbaf500d.png)
+
+
+![statusk8](https://user-images.githubusercontent.com/59208873/126972228-958fc784-dce3-4a7d-bce2-53914c64fcc7.PNG)
+
 
 
   **Swagger**
