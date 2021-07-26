@@ -187,6 +187,17 @@ Go to the project directory finalsubmission
   docker run -d -it -p 8072:8072 am17docker/iotmetricapi
   
   
+  
+  
+  
+  
+ ![k8's-deployment](https://user-images.githubusercontent.com/59208873/126972036-e8f22cf5-e9ca-4c11-835f-698c797abc99.png)
+
+
+![statusk8](https://user-images.githubusercontent.com/59208873/126972058-1d0622ed-08e7-4e26-8137-eaf59ff39960.PNG)
+
+  
+  
 ```
 
   
